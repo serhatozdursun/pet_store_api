@@ -8,7 +8,7 @@ class PetApi():
     def __init__(self):
         self.helper = HelperMethods()
 
-    def pet_api_post(self):
+    def pet_api_post(self) -> request:
         url = constant.BASE_URL + constant.PET_ENDPOINT
 
         # Additional headers.
@@ -38,7 +38,7 @@ class PetApi():
         # convert dict to json by json.dumps() for body data.
         return post(url, headers=constant.HEADERS, data=dumps(body, indent=4))
 
-    def pet_api_get(self, id: int):
+    def pet_api_get(self, id: int) -> request:
         url = constant.BASE_URL + constant.PET_ENDPOINT + "/" + str(id)
         return get(url, headers=constant.HEADERS)
 
@@ -49,7 +49,7 @@ class PetApi():
             category: dict = None,
             tag: dict = None,
             status: str = None
-    ):
+    ) -> request:
         body = {"id": id, }
         url = constant.BASE_URL + constant.PET_ENDPOINT
         isAllNone = all(v is None for v in [name, category, tag, status])
@@ -72,6 +72,6 @@ class PetApi():
 
         return post(url, headers=constant.HEADERS, data=dumps(body, indent=4))
 
-    def pet_api_delete(self, id: int):
+    def pet_api_delete(self, id: int) -> request:
         url = constant.BASE_URL + constant.PET_ENDPOINT + "/" + str(id)
         return delete(url, headers=constant.HEADERS)
